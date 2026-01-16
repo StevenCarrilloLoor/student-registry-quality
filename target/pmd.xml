@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.55.0" timestamp="2026-01-16T11:42:23.976">
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\StudentManager.java">
+<violation beginline="10" endline="10" begincolumn="45" endcolumn="45" rule="ShortVariable" ruleset="Code Style" package="com.student" class="StudentManager" method="addStudent" variable="g" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_codestyle.html#shortvariable" priority="3">
+Avoid variables with short names like g
+</violation>
+<violation beginline="10" endline="10" begincolumn="35" endcolumn="35" rule="ShortVariable" ruleset="Code Style" package="com.student" class="StudentManager" method="addStudent" variable="s" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_codestyle.html#shortvariable" priority="3">
+Avoid variables with short names like s
+</violation>
+<violation beginline="23" endline="23" begincolumn="24" endcolumn="25" rule="ShortVariable" ruleset="Code Style" package="com.student" class="StudentManager" method="main" variable="sm" externalInfoUrl="https://pmd.github.io/pmd-6.55.0/pmd_rules_java_codestyle.html#shortvariable" priority="3">
+Avoid variables with short names like sm
+</violation>
+</file>
+</pmd>
