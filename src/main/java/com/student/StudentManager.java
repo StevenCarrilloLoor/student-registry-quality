@@ -1,38 +1,32 @@
 package com.student;
 
+import com.student.model.BaseStudent;
 import com.student.validation.StudentValidator;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Service class for managing students.
- * Now follows OCP: Extensible through validators without modifying this class.
+ * Now follows LSP: Can work with any BaseStudent subclass.
  */
 public class StudentManager {
-    private final List<Student> students;
+    private final List<BaseStudent> students;
     private StudentValidator validator;
 
     public StudentManager() {
         this.students = new ArrayList<>();
-        this.validator = null; // No validator by default
+        this.validator = null;
     }
     
-    /**
-     * Sets a custom validator.
-     * 
-     * @param validator The validator to use
-     */
     public void setValidator(StudentValidator validator) {
         this.validator = validator;
     }
 
     /**
-     * Adds a student to the registry.
-     * 
-     * @param student The student to add
-     * @throws IllegalArgumentException if student is null, already exists, or fails validation
+     * Adds a BaseStudent to the registry.
+     * LSP: Any BaseStudent subclass works correctly.
      */
-    public void addStudent(Student student) {
+    public void addStudent(BaseStudent student) {
         if (student == null) {
             throw new IllegalArgumentException("Student cannot be null");
         }
@@ -41,19 +35,28 @@ public class StudentManager {
             throw new IllegalArgumentException("Student already exists: " + student.getName());
         }
         
-        // Apply custom validation if set (OCP in action)
-        if (validator != null) {
-            validator.validate(student);
-        }
-        
         students.add(student);
     }
 
     /**
-     * Adds a student by name and grade.
-     * 
-     * @param name  Student's name
-     * @param grade Student's grade
+     * Adds a student using legacy Student class (backward compatibility).
+     */
+    public void addStudent(Student student) {
+        if (student == null) {
+            throw new IllegalArgumentException("Student cannot be null");
+        }
+        
+        // Validate using legacy validator if set
+        if (validator != null) {
+            validator.validate(student);
+        }
+        
+        // Convert to BaseStudent
+        addStudent(new com.student.model.RegularStudent(student.getName(), student.getGrade()));
+    }
+
+    /**
+     * Adds a student by name and grade (creates RegularStudent).
      */
     public void addStudent(String name, double grade) {
         Student student = new Student(name, grade);
@@ -62,26 +65,28 @@ public class StudentManager {
 
     /**
      * Gets all students in the registry.
-     * 
-     * @return Unmodifiable list of students
      */
-    public List<Student> getStudents() {
+    public List<BaseStudent> getAllStudents() {
         return new ArrayList<>(students);
     }
-
+    
     /**
-     * Gets the total number of students.
-     * 
-     * @return Number of students
+     * Legacy method for backward compatibility.
      */
+    public List<Student> getStudents() {
+        List<Student> legacyList = new ArrayList<>();
+        for (BaseStudent bs : students) {
+            legacyList.add(new Student(bs.getName(), bs.getGrade()));
+        }
+        return legacyList;
+    }
+
     public int getStudentCount() {
         return students.size();
     }
 
     /**
-     * Calculates the average grade of all students.
-     * 
-     * @return Average grade, or 0.0 if no students
+     * LSP in action: Works with any BaseStudent subclass.
      */
     public double getAverageGrade() {
         if (students.isEmpty()) {
@@ -89,28 +94,47 @@ public class StudentManager {
         }
         
         double sum = 0.0;
-        for (Student student : students) {
-            sum += student.getGrade();
+        for (BaseStudent student : students) {
+            sum += student.getGrade(); // Polymorphic call
         }
         
         return sum / students.size();
+    }
+    
+    /**
+     * Gets students by status.
+     */
+    public List<BaseStudent> getStudentsByStatus(String status) {
+        List<BaseStudent> result = new ArrayList<>();
+        for (BaseStudent student : students) {
+            if (student.getStatus().equalsIgnoreCase(status)) {
+                result.add(student);
+            }
+        }
+        return result;
     }
 
     public static void main(String[] args) {
         StudentManager manager = new StudentManager();
         
         try {
-            // Demo básico
-            manager.addStudent("John Doe", 85.5);
-            manager.addStudent("Jane Smith", 92.0);
+            // Demo con diferentes tipos de estudiantes (LSP en acción)
+            manager.addStudent(new com.student.model.RegularStudent("John Doe", 85.5));
+            manager.addStudent(new com.student.model.HonorsStudent("Jane Smith", 88.0, 5.0));
+            manager.addStudent(new com.student.model.RegularStudent("Bob Wilson", 72.0));
             
-            System.out.println("=== Student Registry ===");
-            for (Student student : manager.getStudents()) {
+            System.out.println("=== Student Registry (LSP Demo) ===");
+            for (BaseStudent student : manager.getAllStudents()) {
                 System.out.println(student);
             }
             
             System.out.println("\nTotal students: " + manager.getStudentCount());
             System.out.println("Average grade: " + manager.getAverageGrade());
+            
+            System.out.println("\nHonors students:");
+            for (BaseStudent student : manager.getStudentsByStatus("Honors")) {
+                System.out.println("  - " + student.getName());
+            }
             
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());

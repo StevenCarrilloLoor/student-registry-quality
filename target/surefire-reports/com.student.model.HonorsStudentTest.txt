@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.student.StudentTest
+Test set: com.student.model.HonorsStudentTest
 -------------------------------------------------------------------------------
-Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s - in com.student.StudentTest
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s - in com.student.model.HonorsStudentTest

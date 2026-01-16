@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RegularStudent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Student Registry System</a> &gt; <a href="index.source.html" class="el_package">com.student.model</a> &gt; <span class="el_source">RegularStudent.java</span></div><h1>RegularStudent.java</h1><pre class="source lang-java linenums">package com.student.model;
+
+/**
+ * Represents a regular student with a fixed grade.
+ * Follows LSP: Can substitute BaseStudent without issues.
+ */
+public class RegularStudent extends BaseStudent {
+    private final double grade;
+    
+    public RegularStudent(String name, double grade) {
+<span class="fc" id="L11">        super(name);</span>
+<span class="fc" id="L12">        validateGrade(grade);</span>
+<span class="fc" id="L13">        this.grade = grade;</span>
+<span class="fc" id="L14">    }</span>
+    
+    private void validateGrade(double grade) {
+<span class="fc bfc" id="L17" title="All 4 branches covered.">        if (grade &lt; 0.0 || grade &gt; 100.0) {</span>
+<span class="fc" id="L18">            throw new IllegalArgumentException(&quot;Grade must be between 0 and 100&quot;);</span>
+        }
+<span class="fc" id="L20">    }</span>
+    
+    @Override
+    public double getGrade() {
+<span class="fc" id="L24">        return grade;</span>
+    }
+    
+    @Override
+    public String getStatus() {
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (grade &gt;= 90.0) return &quot;Excellent&quot;;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (grade &gt;= 80.0) return &quot;Good&quot;;</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (grade &gt;= 70.0) return &quot;Average&quot;;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (grade &gt;= 60.0) return &quot;Pass&quot;;</span>
+<span class="fc" id="L33">        return &quot;Fail&quot;;</span>
+    }
+    
+    @Override
+    public String toString() {
+<span class="nc" id="L38">        return &quot;Regular Student: &quot; + getName() + &quot;, Grade: &quot; + grade + &quot;, Status: &quot; + getStatus();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

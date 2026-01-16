@@ -1,120 +1,144 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StudentManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Student Registry System</a> &gt; <a href="index.source.html" class="el_package">com.student</a> &gt; <span class="el_source">StudentManager.java</span></div><h1>StudentManager.java</h1><pre class="source lang-java linenums">package com.student;
 
+import com.student.model.BaseStudent;
 import com.student.validation.StudentValidator;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Service class for managing students.
- * Now follows OCP: Extensible through validators without modifying this class.
+ * Now follows LSP: Can work with any BaseStudent subclass.
  */
 public class StudentManager {
-    private final List&lt;Student&gt; students;
+    private final List&lt;BaseStudent&gt; students;
     private StudentValidator validator;
 
-<span class="fc" id="L15">    public StudentManager() {</span>
-<span class="fc" id="L16">        this.students = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L17">        this.validator = null; // No validator by default</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L16">    public StudentManager() {</span>
+<span class="fc" id="L17">        this.students = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L18">        this.validator = null;</span>
+<span class="fc" id="L19">    }</span>
     
-    /**
-     * Sets a custom validator.
-     * 
-     * @param validator The validator to use
-     */
     public void setValidator(StudentValidator validator) {
-<span class="fc" id="L26">        this.validator = validator;</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L22">        this.validator = validator;</span>
+<span class="fc" id="L23">    }</span>
 
     /**
-     * Adds a student to the registry.
-     * 
-     * @param student The student to add
-     * @throws IllegalArgumentException if student is null, already exists, or fails validation
+     * Adds a BaseStudent to the registry.
+     * LSP: Any BaseStudent subclass works correctly.
+     */
+    public void addStudent(BaseStudent student) {
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (student == null) {</span>
+<span class="nc" id="L31">            throw new IllegalArgumentException(&quot;Student cannot be null&quot;);</span>
+        }
+        
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (students.contains(student)) {</span>
+<span class="fc" id="L35">            throw new IllegalArgumentException(&quot;Student already exists: &quot; + student.getName());</span>
+        }
+        
+<span class="fc" id="L38">        students.add(student);</span>
+<span class="fc" id="L39">    }</span>
+
+    /**
+     * Adds a student using legacy Student class (backward compatibility).
      */
     public void addStudent(Student student) {
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (student == null) {</span>
-<span class="fc" id="L37">            throw new IllegalArgumentException(&quot;Student cannot be null&quot;);</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (student == null) {</span>
+<span class="fc" id="L46">            throw new IllegalArgumentException(&quot;Student cannot be null&quot;);</span>
         }
         
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (students.contains(student)) {</span>
-<span class="fc" id="L41">            throw new IllegalArgumentException(&quot;Student already exists: &quot; + student.getName());</span>
+        // Validate using legacy validator if set
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (validator != null) {</span>
+<span class="fc" id="L51">            validator.validate(student);</span>
         }
         
-        // Apply custom validation if set (OCP in action)
-<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (validator != null) {</span>
-<span class="fc" id="L46">            validator.validate(student);</span>
-        }
-        
-<span class="fc" id="L49">        students.add(student);</span>
-<span class="fc" id="L50">    }</span>
+        // Convert to BaseStudent
+<span class="fc" id="L55">        addStudent(new com.student.model.RegularStudent(student.getName(), student.getGrade()));</span>
+<span class="fc" id="L56">    }</span>
 
     /**
-     * Adds a student by name and grade.
-     * 
-     * @param name  Student's name
-     * @param grade Student's grade
+     * Adds a student by name and grade (creates RegularStudent).
      */
     public void addStudent(String name, double grade) {
-<span class="fc" id="L59">        Student student = new Student(name, grade);</span>
-<span class="fc" id="L60">        addStudent(student);</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L62">        Student student = new Student(name, grade);</span>
+<span class="fc" id="L63">        addStudent(student);</span>
+<span class="fc" id="L64">    }</span>
 
     /**
      * Gets all students in the registry.
-     * 
-     * @return Unmodifiable list of students
+     */
+    public List&lt;BaseStudent&gt; getAllStudents() {
+<span class="nc" id="L70">        return new ArrayList&lt;&gt;(students);</span>
+    }
+    
+    /**
+     * Legacy method for backward compatibility.
      */
     public List&lt;Student&gt; getStudents() {
-<span class="fc" id="L69">        return new ArrayList&lt;&gt;(students);</span>
+<span class="fc" id="L77">        List&lt;Student&gt; legacyList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        for (BaseStudent bs : students) {</span>
+<span class="fc" id="L79">            legacyList.add(new Student(bs.getName(), bs.getGrade()));</span>
+<span class="fc" id="L80">        }</span>
+<span class="fc" id="L81">        return legacyList;</span>
     }
 
-    /**
-     * Gets the total number of students.
-     * 
-     * @return Number of students
-     */
     public int getStudentCount() {
-<span class="fc" id="L78">        return students.size();</span>
+<span class="fc" id="L85">        return students.size();</span>
     }
 
     /**
-     * Calculates the average grade of all students.
-     * 
-     * @return Average grade, or 0.0 if no students
+     * LSP in action: Works with any BaseStudent subclass.
      */
     public double getAverageGrade() {
-<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (students.isEmpty()) {</span>
-<span class="fc" id="L88">            return 0.0;</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (students.isEmpty()) {</span>
+<span class="fc" id="L93">            return 0.0;</span>
         }
         
-<span class="fc" id="L91">        double sum = 0.0;</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        for (Student student : students) {</span>
-<span class="fc" id="L93">            sum += student.getGrade();</span>
-<span class="fc" id="L94">        }</span>
+<span class="fc" id="L96">        double sum = 0.0;</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for (BaseStudent student : students) {</span>
+<span class="fc" id="L98">            sum += student.getGrade(); // Polymorphic call</span>
+<span class="fc" id="L99">        }</span>
         
-<span class="fc" id="L96">        return sum / students.size();</span>
+<span class="fc" id="L101">        return sum / students.size();</span>
+    }
+    
+    /**
+     * Gets students by status.
+     */
+    public List&lt;BaseStudent&gt; getStudentsByStatus(String status) {
+<span class="fc" id="L108">        List&lt;BaseStudent&gt; result = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        for (BaseStudent student : students) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (student.getStatus().equalsIgnoreCase(status)) {</span>
+<span class="fc" id="L111">                result.add(student);</span>
+            }
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">        return result;</span>
     }
 
     public static void main(String[] args) {
-<span class="nc" id="L100">        StudentManager manager = new StudentManager();</span>
+<span class="nc" id="L118">        StudentManager manager = new StudentManager();</span>
         
         try {
-            // Demo básico
-<span class="nc" id="L104">            manager.addStudent(&quot;John Doe&quot;, 85.5);</span>
-<span class="nc" id="L105">            manager.addStudent(&quot;Jane Smith&quot;, 92.0);</span>
+            // Demo con diferentes tipos de estudiantes (LSP en acción)
+<span class="nc" id="L122">            manager.addStudent(new com.student.model.RegularStudent(&quot;John Doe&quot;, 85.5));</span>
+<span class="nc" id="L123">            manager.addStudent(new com.student.model.HonorsStudent(&quot;Jane Smith&quot;, 88.0, 5.0));</span>
+<span class="nc" id="L124">            manager.addStudent(new com.student.model.RegularStudent(&quot;Bob Wilson&quot;, 72.0));</span>
             
-<span class="nc" id="L107">            System.out.println(&quot;=== Student Registry ===&quot;);</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">            for (Student student : manager.getStudents()) {</span>
-<span class="nc" id="L109">                System.out.println(student);</span>
-<span class="nc" id="L110">            }</span>
+<span class="nc" id="L126">            System.out.println(&quot;=== Student Registry (LSP Demo) ===&quot;);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            for (BaseStudent student : manager.getAllStudents()) {</span>
+<span class="nc" id="L128">                System.out.println(student);</span>
+<span class="nc" id="L129">            }</span>
             
-<span class="nc" id="L112">            System.out.println(&quot;\nTotal students: &quot; + manager.getStudentCount());</span>
-<span class="nc" id="L113">            System.out.println(&quot;Average grade: &quot; + manager.getAverageGrade());</span>
+<span class="nc" id="L131">            System.out.println(&quot;\nTotal students: &quot; + manager.getStudentCount());</span>
+<span class="nc" id="L132">            System.out.println(&quot;Average grade: &quot; + manager.getAverageGrade());</span>
             
-<span class="nc" id="L115">        } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L116">            System.err.println(&quot;Error: &quot; + e.getMessage());</span>
-<span class="nc" id="L117">        }</span>
-<span class="nc" id="L118">    }</span>
+<span class="nc" id="L134">            System.out.println(&quot;\nHonors students:&quot;);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            for (BaseStudent student : manager.getStudentsByStatus(&quot;Honors&quot;)) {</span>
+<span class="nc" id="L136">                System.out.println(&quot;  - &quot; + student.getName());</span>
+<span class="nc" id="L137">            }</span>
+            
+<span class="nc" id="L139">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L140">            System.err.println(&quot;Error: &quot; + e.getMessage());</span>
+<span class="nc" id="L141">        }</span>
+<span class="nc" id="L142">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

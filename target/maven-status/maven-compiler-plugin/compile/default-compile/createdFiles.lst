@@ -1,6 +1,9 @@
 com\student\Student.class
-com\student\validation\MinimumGradeValidator.class
-com\student\validation\CompositeValidator.class
+com\student\model\RegularStudent.class
 com\student\validation\StudentValidator.class
+com\student\validation\MinimumGradeValidator.class
+com\student\model\BaseStudent.class
+com\student\model\HonorsStudent.class
+com\student\validation\CompositeValidator.class
 com\student\StudentManager.class
 com\student\validation\MinimumNameLengthValidator.class

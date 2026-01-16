@@ -2,9 +2,13 @@ package com.student;
 
 import com.student.validation.MinimumGradeValidator;
 import com.student.validation.MinimumNameLengthValidator;
+import com.student.model.HonorsStudent;
+import com.student.model.RegularStudent;
 import com.student.validation.CompositeValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
+import com.student.model.HonorsStudent;
+import com.student.model.RegularStudent;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentManagerTest {
@@ -133,5 +137,61 @@ public class StudentManagerTest {
         assertThrows(IllegalArgumentException.class, () -> {
             manager.addStudent("Jane Smith", 50.0);
         });
+    }
+    // Pruebas para LSP
+    
+    @Test
+    public void testAddRegularStudent() {
+        RegularStudent student = new com.student.model.RegularStudent("John Doe", 85.0);
+        manager.addStudent(student);
+        
+        assertEquals(1, manager.getStudentCount());
+    }
+    
+    @Test
+    public void testAddHonorsStudent() {
+        HonorsStudent student = new com.student.model.HonorsStudent("Jane Smith", 88.0, 5.0);
+        manager.addStudent(student);
+        
+        assertEquals(1, manager.getStudentCount());
+    }
+    
+    @Test
+    public void testMixedStudentTypes() {
+        manager.addStudent(new com.student.model.RegularStudent("John Doe", 85.0));
+        manager.addStudent(new com.student.model.HonorsStudent("Jane Smith", 88.0, 5.0));
+        
+        assertEquals(2, manager.getStudentCount());
+    }
+    
+    @Test
+    public void testAverageGradeWithMixedTypes() {
+        manager.addStudent(new com.student.model.RegularStudent("John Doe", 80.0));
+        manager.addStudent(new com.student.model.HonorsStudent("Jane Smith", 85.0, 10.0));
+        
+        // Average: (80 + 95) / 2 = 87.5
+        assertEquals(87.5, manager.getAverageGrade(), 0.01);
+    }
+    
+    @Test
+    public void testGetStudentsByStatus() {
+        manager.addStudent(new com.student.model.RegularStudent("John Doe", 95.0));
+        manager.addStudent(new com.student.model.RegularStudent("Bob Wilson", 85.0));
+        manager.addStudent(new com.student.model.HonorsStudent("Jane Smith", 90.0, 5.0));
+        
+        // John Doe tiene 95.0 → Status "Excellent"
+        var excellentStudents = manager.getStudentsByStatus("Excellent");
+        assertEquals(1, excellentStudents.size());
+        assertEquals("John Doe", excellentStudents.get(0).getName());
+        
+        // Jane Smith tiene 90+5=95 → Status "Honors with Distinction"
+        var honorsStudents = manager.getStudentsByStatus("Honors with Distinction");
+        assertEquals(1, honorsStudents.size());
+        assertEquals("Jane Smith", honorsStudents.get(0).getName());
+        
+        // Bob Wilson tiene 85.0 → Status "Good"
+        var goodStudents = manager.getStudentsByStatus("Good");
+        assertEquals(1, goodStudents.size());
+        assertEquals("Bob Wilson", goodStudents.get(0).getName());
     }
 }
