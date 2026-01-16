@@ -1,2 +1,5 @@
 com\student\StudentManagerTest.class
+com\student\validation\CompositeValidatorTest.class
+com\student\validation\MinimumGradeValidatorTest.class
 com\student\StudentTest.class
+com\student\validation\MinimumNameLengthValidatorTest.class

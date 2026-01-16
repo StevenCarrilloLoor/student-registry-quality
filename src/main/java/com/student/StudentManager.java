@@ -1,24 +1,36 @@
 package com.student;
 
+import com.student.validation.StudentValidator;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Service class for managing students.
- * This class follows SRP by focusing only on business logic.
+ * Now follows OCP: Extensible through validators without modifying this class.
  */
 public class StudentManager {
     private final List<Student> students;
+    private StudentValidator validator;
 
     public StudentManager() {
         this.students = new ArrayList<>();
+        this.validator = null; // No validator by default
+    }
+    
+    /**
+     * Sets a custom validator.
+     * 
+     * @param validator The validator to use
+     */
+    public void setValidator(StudentValidator validator) {
+        this.validator = validator;
     }
 
     /**
      * Adds a student to the registry.
      * 
      * @param student The student to add
-     * @throws IllegalArgumentException if student is null or already exists
+     * @throws IllegalArgumentException if student is null, already exists, or fails validation
      */
     public void addStudent(Student student) {
         if (student == null) {
@@ -27,6 +39,11 @@ public class StudentManager {
         
         if (students.contains(student)) {
             throw new IllegalArgumentException("Student already exists: " + student.getName());
+        }
+        
+        // Apply custom validation if set (OCP in action)
+        if (validator != null) {
+            validator.validate(student);
         }
         
         students.add(student);
@@ -83,6 +100,7 @@ public class StudentManager {
         StudentManager manager = new StudentManager();
         
         try {
+            // Demo básico
             manager.addStudent("John Doe", 85.5);
             manager.addStudent("Jane Smith", 92.0);
             

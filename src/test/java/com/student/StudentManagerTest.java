@@ -1,5 +1,8 @@
 package com.student;
 
+import com.student.validation.MinimumGradeValidator;
+import com.student.validation.MinimumNameLengthValidator;
+import com.student.validation.CompositeValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,5 +89,49 @@ public class StudentManagerTest {
         manager.addStudent("Bob Johnson", 70.0);
         
         assertEquals(80.0, manager.getAverageGrade(), 0.01);
+    }
+    
+    // Nuevas pruebas para OCP
+    
+    @Test
+    public void testSetValidator() {
+        MinimumGradeValidator validator = new MinimumGradeValidator(60.0);
+        manager.setValidator(validator);
+        
+        // Debería permitir calificación >= 60
+        assertDoesNotThrow(() -> manager.addStudent("John Doe", 85.0));
+    }
+    
+    @Test
+    public void testValidatorRejectsStudent() {
+        MinimumGradeValidator validator = new MinimumGradeValidator(60.0);
+        manager.setValidator(validator);
+        
+        // Debería rechazar calificación < 60
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.addStudent("John Doe", 50.0);
+        });
+    }
+    
+    @Test
+    public void testCompositeValidatorWithMultipleRules() {
+        CompositeValidator composite = new CompositeValidator();
+        composite.addValidator(new MinimumNameLengthValidator(5));
+        composite.addValidator(new MinimumGradeValidator(60.0));
+        
+        manager.setValidator(composite);
+        
+        // Debería aceptar estudiante válido
+        assertDoesNotThrow(() -> manager.addStudent("John Doe", 85.0));
+        
+        // Debería rechazar nombre corto
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.addStudent("Bob", 85.0);
+        });
+        
+        // Debería rechazar calificación baja
+        assertThrows(IllegalArgumentException.class, () -> {
+            manager.addStudent("Jane Smith", 50.0);
+        });
     }
 }
