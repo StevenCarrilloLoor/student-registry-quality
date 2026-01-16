@@ -1,10 +1,14 @@
 package com.student.model;
 
+import com.student.interfaces.Gradable;
+import com.student.interfaces.Identifiable;
+import com.student.interfaces.Statusable;
+
 /**
  * Abstract base class for all student types.
- * Follows LSP: All subclasses can be substituted without breaking behavior.
+ * Now implements segregated interfaces (ISP).
  */
-public abstract class BaseStudent {
+public abstract class BaseStudent implements Identifiable, Gradable, Statusable {
     private final String name;
     
     protected BaseStudent(String name) {
@@ -18,19 +22,21 @@ public abstract class BaseStudent {
         }
     }
     
+    @Override
     public String getName() {
         return name;
     }
     
     /**
-     * Gets the student's grade.
-     * All students must be able to provide a grade.
+     * Gets the student's grade (Gradable interface).
      */
+    @Override
     public abstract double getGrade();
     
     /**
-     * Gets the student's status.
+     * Gets the student's status (Statusable interface).
      */
+    @Override
     public abstract String getStatus();
     
     @Override

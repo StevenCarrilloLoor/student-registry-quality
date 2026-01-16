@@ -1,60 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HonorsStudent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Student Registry System</a> &gt; <a href="index.source.html" class="el_package">com.student.model</a> &gt; <span class="el_source">HonorsStudent.java</span></div><h1>HonorsStudent.java</h1><pre class="source lang-java linenums">package com.student.model;
 
+import com.student.interfaces.Reportable;
+
 /**
  * Represents an honors student with weighted grade calculation.
- * Follows LSP: Can substitute BaseStudent, adds bonus without breaking behavior.
+ * Implements Reportable (ISP) - optional capability.
  */
-public class HonorsStudent extends BaseStudent {
+public class HonorsStudent extends BaseStudent implements Reportable {
     private final double baseGrade;
     private final double bonusPoints;
     
     public HonorsStudent(String name, double baseGrade, double bonusPoints) {
-<span class="fc" id="L12">        super(name);</span>
-<span class="fc" id="L13">        validateGrade(baseGrade);</span>
-<span class="fc" id="L14">        validateBonus(bonusPoints);</span>
-<span class="fc" id="L15">        this.baseGrade = baseGrade;</span>
-<span class="fc" id="L16">        this.bonusPoints = bonusPoints;</span>
-<span class="fc" id="L17">    }</span>
+<span class="fc" id="L14">        super(name);</span>
+<span class="fc" id="L15">        validateGrade(baseGrade);</span>
+<span class="fc" id="L16">        validateBonus(bonusPoints);</span>
+<span class="fc" id="L17">        this.baseGrade = baseGrade;</span>
+<span class="fc" id="L18">        this.bonusPoints = bonusPoints;</span>
+<span class="fc" id="L19">    }</span>
     
     private void validateGrade(double grade) {
-<span class="pc bpc" id="L20" title="1 of 4 branches missed.">        if (grade &lt; 0.0 || grade &gt; 100.0) {</span>
-<span class="fc" id="L21">            throw new IllegalArgumentException(&quot;Base grade must be between 0 and 100&quot;);</span>
+<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        if (grade &lt; 0.0 || grade &gt; 100.0) {</span>
+<span class="fc" id="L23">            throw new IllegalArgumentException(&quot;Base grade must be between 0 and 100&quot;);</span>
         }
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L25">    }</span>
     
     private void validateBonus(double bonus) {
-<span class="fc bfc" id="L26" title="All 4 branches covered.">        if (bonus &lt; 0.0 || bonus &gt; 10.0) {</span>
-<span class="fc" id="L27">            throw new IllegalArgumentException(&quot;Bonus points must be between 0 and 10&quot;);</span>
+<span class="fc bfc" id="L28" title="All 4 branches covered.">        if (bonus &lt; 0.0 || bonus &gt; 10.0) {</span>
+<span class="fc" id="L29">            throw new IllegalArgumentException(&quot;Bonus points must be between 0 and 10&quot;);</span>
         }
-<span class="fc" id="L29">    }</span>
+<span class="fc" id="L31">    }</span>
     
     @Override
     public double getGrade() {
-        // Weighted grade with bonus, capped at 100
-<span class="fc" id="L34">        return Math.min(100.0, baseGrade + bonusPoints);</span>
+<span class="fc" id="L35">        return Math.min(100.0, baseGrade + bonusPoints);</span>
     }
     
     @Override
     public String getStatus() {
-<span class="fc" id="L39">        double finalGrade = getGrade();</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (finalGrade &gt;= 95.0) return &quot;Honors with Distinction&quot;;</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (finalGrade &gt;= 90.0) return &quot;Honors&quot;;</span>
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (finalGrade &gt;= 85.0) return &quot;High Honors&quot;;</span>
-<span class="fc" id="L43">        return &quot;Honors Candidate&quot;;</span>
+<span class="fc" id="L40">        double finalGrade = getGrade();</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (finalGrade &gt;= 95.0) return &quot;Honors with Distinction&quot;;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (finalGrade &gt;= 90.0) return &quot;Honors&quot;;</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (finalGrade &gt;= 85.0) return &quot;High Honors&quot;;</span>
+<span class="fc" id="L44">        return &quot;Honors Candidate&quot;;</span>
     }
     
     public double getBaseGrade() {
-<span class="fc" id="L47">        return baseGrade;</span>
+<span class="fc" id="L48">        return baseGrade;</span>
     }
     
     public double getBonusPoints() {
-<span class="fc" id="L51">        return bonusPoints;</span>
+<span class="fc" id="L52">        return bonusPoints;</span>
+    }
+    
+    /**
+     * Generates detailed report (Reportable interface).
+     * ISP: Only HonorsStudent implements this, RegularStudent doesn't need it.
+     */
+    @Override
+    public String generateReport() {
+<span class="fc" id="L61">        StringBuilder report = new StringBuilder();</span>
+<span class="fc" id="L62">        report.append(&quot;=== HONORS STUDENT REPORT ===\n&quot;);</span>
+<span class="fc" id="L63">        report.append(&quot;Name: &quot;).append(getName()).append(&quot;\n&quot;);</span>
+<span class="fc" id="L64">        report.append(&quot;Base Grade: &quot;).append(baseGrade).append(&quot;\n&quot;);</span>
+<span class="fc" id="L65">        report.append(&quot;Bonus Points: &quot;).append(bonusPoints).append(&quot;\n&quot;);</span>
+<span class="fc" id="L66">        report.append(&quot;Final Grade: &quot;).append(getGrade()).append(&quot;\n&quot;);</span>
+<span class="fc" id="L67">        report.append(&quot;Status: &quot;).append(getStatus()).append(&quot;\n&quot;);</span>
+<span class="fc" id="L68">        report.append(&quot;Performance: &quot;);</span>
+        
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (getGrade() &gt;= 95.0) {</span>
+<span class="fc" id="L71">            report.append(&quot;Outstanding performance with distinction&quot;);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        } else if (getGrade() &gt;= 90.0) {</span>
+<span class="nc" id="L73">            report.append(&quot;Excellent honors level achievement&quot;);</span>
+        } else {
+<span class="nc" id="L75">            report.append(&quot;Strong honors candidate&quot;);</span>
+        }
+        
+<span class="fc" id="L78">        return report.toString();</span>
     }
     
     @Override
     public String toString() {
-<span class="nc" id="L56">        return &quot;Honors Student: &quot; + getName() + &quot;, Base Grade: &quot; + baseGrade + </span>
-<span class="nc" id="L57">               &quot;, Bonus: &quot; + bonusPoints + &quot;, Final: &quot; + getGrade() + &quot;, Status: &quot; + getStatus();</span>
+<span class="nc" id="L83">        return &quot;Honors Student: &quot; + getName() + &quot;, Base Grade: &quot; + baseGrade + </span>
+<span class="nc" id="L84">               &quot;, Bonus: &quot; + bonusPoints + &quot;, Final: &quot; + getGrade() + &quot;, Status: &quot; + getStatus();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

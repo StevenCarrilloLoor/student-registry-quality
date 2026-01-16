@@ -1,5 +1,7 @@
+com\student\interfaces\InterfaceSegregationTest.class
 com\student\StudentTest.class
 com\student\model\HonorsStudentTest.class
+com\student\report\ReportGeneratorTest.class
 com\student\StudentManagerTest.class
 com\student\validation\CompositeValidatorTest.class
 com\student\validation\MinimumGradeValidatorTest.class

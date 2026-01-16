@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReportGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Student Registry System</a> &gt; <a href="index.source.html" class="el_package">com.student.report</a> &gt; <span class="el_source">ReportGenerator.java</span></div><h1>ReportGenerator.java</h1><pre class="source lang-java linenums">package com.student.report;
+
+import com.student.interfaces.Gradable;
+import com.student.interfaces.Identifiable;
+import com.student.interfaces.Reportable;
+import com.student.interfaces.Statusable;
+import java.util.List;
+
+/**
+ * Report generator that uses segregated interfaces (ISP).
+ * Only depends on the specific interfaces it needs.
+ */
+<span class="fc" id="L13">public class ReportGenerator {</span>
+    
+    /**
+     * Generates basic summary (only needs Identifiable and Gradable).
+     * ISP: Doesn't depend on unnecessary methods.
+     */
+    public String generateBasicSummary(List&lt;? extends Identifiable&gt; entities) {
+<span class="fc" id="L20">        StringBuilder summary = new StringBuilder();</span>
+<span class="fc" id="L21">        summary.append(&quot;=== BASIC SUMMARY ===\n&quot;);</span>
+<span class="fc" id="L22">        summary.append(&quot;Total entities: &quot;).append(entities.size()).append(&quot;\n&quot;);</span>
+        
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        for (Identifiable entity : entities) {</span>
+<span class="fc" id="L25">            summary.append(&quot;- &quot;).append(entity.getName()).append(&quot;\n&quot;);</span>
+<span class="fc" id="L26">        }</span>
+        
+<span class="fc" id="L28">        return summary.toString();</span>
+    }
+    
+    /**
+     * Generates grade summary (needs Identifiable and Gradable).
+     */
+    public String generateGradeSummary(List&lt;? extends Gradable&gt; gradables) {
+<span class="fc" id="L35">        StringBuilder summary = new StringBuilder();</span>
+<span class="fc" id="L36">        summary.append(&quot;=== GRADE SUMMARY ===\n&quot;);</span>
+        
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (gradables.isEmpty()) {</span>
+<span class="fc" id="L39">            summary.append(&quot;No grades available.\n&quot;);</span>
+<span class="fc" id="L40">            return summary.toString();</span>
+        }
+        
+<span class="fc" id="L43">        double total = 0.0;</span>
+<span class="fc" id="L44">        double highest = Double.MIN_VALUE;</span>
+<span class="fc" id="L45">        double lowest = Double.MAX_VALUE;</span>
+        
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (Gradable gradable : gradables) {</span>
+<span class="fc" id="L48">            double grade = gradable.getGrade();</span>
+<span class="fc" id="L49">            total += grade;</span>
+<span class="fc" id="L50">            highest = Math.max(highest, grade);</span>
+<span class="fc" id="L51">            lowest = Math.min(lowest, grade);</span>
+<span class="fc" id="L52">        }</span>
+        
+<span class="fc" id="L54">        summary.append(&quot;Count: &quot;).append(gradables.size()).append(&quot;\n&quot;);</span>
+<span class="fc" id="L55">        summary.append(&quot;Average: &quot;).append(String.format(&quot;%.2f&quot;, total / gradables.size())).append(&quot;\n&quot;);</span>
+<span class="fc" id="L56">        summary.append(&quot;Highest: &quot;).append(highest).append(&quot;\n&quot;);</span>
+<span class="fc" id="L57">        summary.append(&quot;Lowest: &quot;).append(lowest).append(&quot;\n&quot;);</span>
+        
+<span class="fc" id="L59">        return summary.toString();</span>
+    }
+    
+    /**
+     * Generates detailed reports (only for Reportable entities).
+     * ISP: Only works with entities that implement Reportable.
+     */
+    public String generateDetailedReports(List&lt;? extends Reportable&gt; reportables) {
+<span class="fc" id="L67">        StringBuilder summary = new StringBuilder();</span>
+<span class="fc" id="L68">        summary.append(&quot;=== DETAILED REPORTS ===\n\n&quot;);</span>
+        
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        for (Reportable reportable : reportables) {</span>
+<span class="fc" id="L71">            summary.append(reportable.generateReport()).append(&quot;\n\n&quot;);</span>
+<span class="fc" id="L72">        }</span>
+        
+<span class="fc" id="L74">        return summary.toString();</span>
+    }
+    
+    /**
+     * Generates status distribution (needs Identifiable and Statusable).
+     */
+    public String generateStatusDistribution(List&lt;? extends Statusable&gt; statusables) {
+<span class="fc" id="L81">        StringBuilder summary = new StringBuilder();</span>
+<span class="fc" id="L82">        summary.append(&quot;=== STATUS DISTRIBUTION ===\n&quot;);</span>
+        
+        // Simple count by status
+<span class="fc bfc" id="L85" title="All 2 branches covered.">        for (Statusable statusable : statusables) {</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">            if (statusable instanceof Identifiable) {</span>
+<span class="fc" id="L87">                Identifiable id = (Identifiable) statusable;</span>
+<span class="fc" id="L88">                summary.append(id.getName()).append(&quot;: &quot;).append(statusable.getStatus()).append(&quot;\n&quot;);</span>
+            }
+<span class="fc" id="L90">        }</span>
+        
+<span class="fc" id="L92">        return summary.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

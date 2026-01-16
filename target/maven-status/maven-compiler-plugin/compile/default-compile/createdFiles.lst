@@ -1,9 +1,14 @@
 com\student\Student.class
+com\student\interfaces\Gradable.class
 com\student\model\RegularStudent.class
 com\student\validation\StudentValidator.class
 com\student\validation\MinimumGradeValidator.class
-com\student\model\BaseStudent.class
 com\student\model\HonorsStudent.class
+com\student\report\ReportGenerator.class
+com\student\interfaces\Statusable.class
+com\student\validation\MinimumNameLengthValidator.class
+com\student\interfaces\Identifiable.class
+com\student\interfaces\Reportable.class
+com\student\model\BaseStudent.class
 com\student\validation\CompositeValidator.class
 com\student\StudentManager.class
-com\student\validation\MinimumNameLengthValidator.class
