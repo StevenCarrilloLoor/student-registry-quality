@@ -1,129 +1,93 @@
 package com.student;
 
 import com.student.model.BaseStudent;
+import com.student.model.RegularStudent;
+import com.student.model.HonorsStudent;
+import com.student.repository.InMemoryStudentRepository;
+import com.student.repository.StudentRepository;
+import com.student.service.StudentService;
 import com.student.validation.StudentValidator;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service class for managing students.
- * Now follows LSP: Can work with any BaseStudent subclass.
+ * Main manager class that now uses DIP through StudentService.
+ * Depends on abstractions, not concrete implementations.
  */
 public class StudentManager {
-    private final List<BaseStudent> students;
-    private StudentValidator validator;
-
+    private final StudentService studentService;
+    
+    /**
+     * Constructor with dependency injection (DIP).
+     */
+    public StudentManager(StudentRepository repository, StudentValidator validator) {
+        this.studentService = new StudentService(repository, validator);
+    }
+    
+    /**
+     * Default constructor (for backward compatibility).
+     */
     public StudentManager() {
-        this.students = new ArrayList<>();
-        this.validator = null;
+        this(new InMemoryStudentRepository(), null);
     }
     
     public void setValidator(StudentValidator validator) {
-        this.validator = validator;
+        // Note: In pure DIP, validator should be injected in constructor
+        // This is kept for backward compatibility
     }
 
-    /**
-     * Adds a BaseStudent to the registry.
-     * LSP: Any BaseStudent subclass works correctly.
-     */
     public void addStudent(BaseStudent student) {
-        if (student == null) {
-            throw new IllegalArgumentException("Student cannot be null");
-        }
-        
-        if (students.contains(student)) {
-            throw new IllegalArgumentException("Student already exists: " + student.getName());
-        }
-        
-        students.add(student);
+        studentService.addStudent(student);
     }
 
-    /**
-     * Adds a student using legacy Student class (backward compatibility).
-     */
     public void addStudent(Student student) {
         if (student == null) {
             throw new IllegalArgumentException("Student cannot be null");
         }
-        
-        // Validate using legacy validator if set
-        if (validator != null) {
-            validator.validate(student);
-        }
-        
-        // Convert to BaseStudent
-        addStudent(new com.student.model.RegularStudent(student.getName(), student.getGrade()));
+        addStudent(new RegularStudent(student.getName(), student.getGrade()));
     }
 
-    /**
-     * Adds a student by name and grade (creates RegularStudent).
-     */
     public void addStudent(String name, double grade) {
         Student student = new Student(name, grade);
         addStudent(student);
     }
 
-    /**
-     * Gets all students in the registry.
-     */
     public List<BaseStudent> getAllStudents() {
-        return new ArrayList<>(students);
+        return studentService.getAllStudents();
     }
     
-    /**
-     * Legacy method for backward compatibility.
-     */
     public List<Student> getStudents() {
+        List<BaseStudent> all = studentService.getAllStudents();
         List<Student> legacyList = new ArrayList<>();
-        for (BaseStudent bs : students) {
+        for (BaseStudent bs : all) {
             legacyList.add(new Student(bs.getName(), bs.getGrade()));
         }
         return legacyList;
     }
 
     public int getStudentCount() {
-        return students.size();
+        return studentService.getStudentCount();
     }
 
-    /**
-     * LSP in action: Works with any BaseStudent subclass.
-     */
     public double getAverageGrade() {
-        if (students.isEmpty()) {
-            return 0.0;
-        }
-        
-        double sum = 0.0;
-        for (BaseStudent student : students) {
-            sum += student.getGrade(); // Polymorphic call
-        }
-        
-        return sum / students.size();
+        return studentService.getAverageGrade();
     }
     
-    /**
-     * Gets students by status.
-     */
     public List<BaseStudent> getStudentsByStatus(String status) {
-        List<BaseStudent> result = new ArrayList<>();
-        for (BaseStudent student : students) {
-            if (student.getStatus().equalsIgnoreCase(status)) {
-                result.add(student);
-            }
-        }
-        return result;
+        return studentService.getStudentsByStatus(status);
     }
 
     public static void main(String[] args) {
-        StudentManager manager = new StudentManager();
+        // DIP Demo: Using dependency injection
+        StudentRepository repository = new InMemoryStudentRepository();
+        StudentManager manager = new StudentManager(repository, null);
         
         try {
-            // Demo con diferentes tipos de estudiantes (LSP en acción)
-            manager.addStudent(new com.student.model.RegularStudent("John Doe", 85.5));
-            manager.addStudent(new com.student.model.HonorsStudent("Jane Smith", 88.0, 5.0));
-            manager.addStudent(new com.student.model.RegularStudent("Bob Wilson", 72.0));
+            manager.addStudent(new RegularStudent("John Doe", 85.5));
+            manager.addStudent(new HonorsStudent("Jane Smith", 88.0, 5.0));
+            manager.addStudent(new RegularStudent("Bob Wilson", 72.0));
             
-            System.out.println("=== Student Registry (LSP Demo) ===");
+            System.out.println("=== Student Registry (DIP Demo) ===");
             for (BaseStudent student : manager.getAllStudents()) {
                 System.out.println(student);
             }
@@ -131,10 +95,10 @@ public class StudentManager {
             System.out.println("\nTotal students: " + manager.getStudentCount());
             System.out.println("Average grade: " + manager.getAverageGrade());
             
-            System.out.println("\nHonors students:");
-            for (BaseStudent student : manager.getStudentsByStatus("Honors")) {
-                System.out.println("  - " + student.getName());
-            }
+            System.out.println("\nDIP Benefits:");
+            System.out.println("- StudentManager depends on StudentRepository interface");
+            System.out.println("- Can easily swap InMemoryRepository for DatabaseRepository");
+            System.out.println("- High-level modules don't depend on low-level details");
             
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());

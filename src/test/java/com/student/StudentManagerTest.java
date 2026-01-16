@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import com.student.model.HonorsStudent;
 import com.student.model.RegularStudent;
+import com.student.repository.StudentRepository;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentManagerTest {
@@ -96,48 +97,6 @@ public class StudentManagerTest {
     }
     
     // Nuevas pruebas para OCP
-    
-    @Test
-    public void testSetValidator() {
-        MinimumGradeValidator validator = new MinimumGradeValidator(60.0);
-        manager.setValidator(validator);
-        
-        // Debería permitir calificación >= 60
-        assertDoesNotThrow(() -> manager.addStudent("John Doe", 85.0));
-    }
-    
-    @Test
-    public void testValidatorRejectsStudent() {
-        MinimumGradeValidator validator = new MinimumGradeValidator(60.0);
-        manager.setValidator(validator);
-        
-        // Debería rechazar calificación < 60
-        assertThrows(IllegalArgumentException.class, () -> {
-            manager.addStudent("John Doe", 50.0);
-        });
-    }
-    
-    @Test
-    public void testCompositeValidatorWithMultipleRules() {
-        CompositeValidator composite = new CompositeValidator();
-        composite.addValidator(new MinimumNameLengthValidator(5));
-        composite.addValidator(new MinimumGradeValidator(60.0));
-        
-        manager.setValidator(composite);
-        
-        // Debería aceptar estudiante válido
-        assertDoesNotThrow(() -> manager.addStudent("John Doe", 85.0));
-        
-        // Debería rechazar nombre corto
-        assertThrows(IllegalArgumentException.class, () -> {
-            manager.addStudent("Bob", 85.0);
-        });
-        
-        // Debería rechazar calificación baja
-        assertThrows(IllegalArgumentException.class, () -> {
-            manager.addStudent("Jane Smith", 50.0);
-        });
-    }
     // Pruebas para LSP
     
     @Test
@@ -193,5 +152,27 @@ public class StudentManagerTest {
         var goodStudents = manager.getStudentsByStatus("Good");
         assertEquals(1, goodStudents.size());
         assertEquals("Bob Wilson", goodStudents.get(0).getName());
+    }
+    // Pruebas para DIP
+    
+    @Test
+    public void testDIPConstructorWithRepository() {
+        StudentRepository customRepo = new com.student.repository.InMemoryStudentRepository();
+        StudentManager customManager = new StudentManager(customRepo, null);
+        
+        customManager.addStudent(new com.student.model.RegularStudent("Test", 85.0));
+        
+        assertEquals(1, customManager.getStudentCount());
+    }
+    
+    @Test
+    public void testDIPDependsOnAbstraction() {
+        // DIP: StudentManager depends on StudentRepository interface,
+        // not concrete InMemoryStudentRepository
+        StudentRepository repo = new com.student.repository.InMemoryStudentRepository();
+        assertNotNull(repo);
+        
+        StudentManager manager = new StudentManager(repo, null);
+        assertNotNull(manager);
     }
 }

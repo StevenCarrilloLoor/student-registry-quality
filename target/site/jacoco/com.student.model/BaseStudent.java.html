@@ -41,10 +41,10 @@ public abstract class BaseStudent implements Identifiable, Gradable, Statusable 
     
     @Override
     public boolean equals(Object obj) {
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (this == obj) return true;</span>
-<span class="pc bpc" id="L45" title="1 of 4 branches missed.">        if (obj == null || getClass() != obj.getClass()) return false;</span>
-<span class="fc" id="L46">        BaseStudent student = (BaseStudent) obj;</span>
-<span class="fc" id="L47">        return name.equals(student.name);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (this == obj) return true;</span>
+<span class="nc bnc" id="L45" title="All 4 branches missed.">        if (obj == null || getClass() != obj.getClass()) return false;</span>
+<span class="nc" id="L46">        BaseStudent student = (BaseStudent) obj;</span>
+<span class="nc" id="L47">        return name.equals(student.name);</span>
     }
     
     @Override

@@ -1,7 +1,9 @@
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Gradable.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Reportable.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\BaseStudent.java
+C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\repository\StudentRepository.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\StudentValidator.java
+C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\service\StudentService.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\report\ReportGenerator.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\MinimumGradeValidator.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Statusable.java
@@ -11,4 +13,5 @@ C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\stud
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\CompositeValidator.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Identifiable.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\HonorsStudent.java
+C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\repository\InMemoryStudentRepository.java
 C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\RegularStudent.java

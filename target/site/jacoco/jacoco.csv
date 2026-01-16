@@ -3,8 +3,10 @@ Student Registry System,com.student.validation,MinimumNameLengthValidator,0,22,0
 Student Registry System,com.student.validation,MinimumGradeValidator,0,22,0,2,0,7,0,4,0,3
 Student Registry System,com.student.validation,CompositeValidator,0,39,0,2,0,11,0,6,0,5
 Student Registry System,com.student.report,ReportGenerator,0,210,1,11,0,41,1,10,0,5
-Student Registry System,com.student.model,BaseStudent,6,45,2,8,1,12,3,7,1,4
+Student Registry System,com.student.repository,InMemoryStudentRepository,0,72,0,4,0,17,0,11,0,9
+Student Registry System,com.student.model,BaseStudent,27,24,6,4,5,8,5,5,2,3
 Student Registry System,com.student.model,HonorsStudent,26,151,4,14,5,31,4,14,1,8
 Student Registry System,com.student.model,RegularStudent,8,57,0,12,1,13,1,10,1,4
+Student Registry System,com.student.service,StudentService,0,114,0,12,0,31,0,15,0,9
 Student Registry System,com.student,Student,4,51,1,5,1,11,2,8,1,6
-Student Registry System,com.student,StudentManager,94,160,5,17,20,39,5,17,2,9
+Student Registry System,com.student,StudentManager,85,93,2,4,21,23,4,11,3,9

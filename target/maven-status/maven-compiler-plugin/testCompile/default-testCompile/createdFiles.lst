@@ -2,8 +2,10 @@ com\student\interfaces\InterfaceSegregationTest.class
 com\student\StudentTest.class
 com\student\model\HonorsStudentTest.class
 com\student\report\ReportGeneratorTest.class
+com\student\repository\InMemoryStudentRepositoryTest.class
 com\student\StudentManagerTest.class
 com\student\validation\CompositeValidatorTest.class
 com\student\validation\MinimumGradeValidatorTest.class
 com\student\model\RegularStudentTest.class
+com\student\service\StudentServiceTest.class
 com\student\validation\MinimumNameLengthValidatorTest.class
