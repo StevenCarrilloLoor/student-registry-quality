@@ -37,21 +37,21 @@ jobs:
       run: mvn jacoco:report
       
     - name: Upload Checkstyle report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: checkstyle-report
         path: target/site/checkstyle.html
         
     - name: Upload PMD report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: pmd-report
         path: target/site/pmd.html
         
     - name: Upload JaCoCo report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: jacoco-report
