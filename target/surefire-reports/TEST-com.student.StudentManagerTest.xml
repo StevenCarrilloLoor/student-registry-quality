@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.student.StudentManagerTest" time="0.014" tests="16" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.student.StudentManagerTest" time="0.025" tests="16" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Amazon Corretto\jdk17.0.17_10\bin"/>
-    <property name="sun.java.command" value="C:\Users\steve\AppData\Local\Temp\surefire8238379823175177682\surefirebooter-20260116123040280_3.jar C:\Users\steve\AppData\Local\Temp\surefire8238379823175177682 2026-01-16T12-30-40_139-jvmRun1 surefire-20260116123040280_1tmp surefire_0-20260116123040280_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\steve\AppData\Local\Temp\surefire10978130660565100797\surefirebooter-20260120162915747_3.jar C:\Users\steve\AppData\Local\Temp\surefire10978130660565100797 2026-01-20T16-29-15_552-jvmRun1 surefire-20260120162915747_1tmp surefire_0-20260120162915747_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\target\test-classes;C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\target\classes;C:\Users\steve\.m2\repository\org\junit\jupiter\junit-jupiter\5.9.3\junit-jupiter-5.9.3.jar;C:\Users\steve\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\steve\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\steve\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\steve\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\steve\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;C:\Users\steve\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\steve\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\steve\AppData\Local\Temp\surefire8238379823175177682\surefirebooter-20260116123040280_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\steve\AppData\Local\Temp\surefire10978130660565100797\surefirebooter-20260120162915747_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.17+10-LTS"/>
@@ -52,7 +52,7 @@
     <property name="user.language.format" value="es"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="native.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Amazon Corretto\jdk17.0.17_10\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\steve\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\steve\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files\Amazon Corretto\jdk17.0.17_10\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Amazon Corretto\jdk11.0.29_7\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\Users\steve\scoop\apps\maven\current\bin;C:\Users\steve\scoop\shims;C:\Users\steve\AppData\Local\Microsoft\WindowsApps;C:\Users\steve\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\steve\AppData\Roaming\npm;c:\Users\steve\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;."/>
+    <property name="java.library.path" value="C:\Program Files\Amazon Corretto\jdk17.0.17_10\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Users\steve\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\steve\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files (x86)\VMware\VMware Workstation\bin\;C:\Program Files\Amazon Corretto\jdk17.0.17_10\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Amazon Corretto\jdk11.0.29_7\bin;C:\Program Files\Microsoft MPI\Bin\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\160\DTS\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\chocolatey\bin;C:\sonar-scanner\bin;C:\Users\steve\scoop\apps\maven\current\bin;C:\Users\steve\scoop\shims;C:\Users\steve\AppData\Local\Microsoft\WindowsApps;C:\Users\steve\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\steve\AppData\Roaming\npm;c:\Users\steve\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.vendor" value="Amazon.com Inc."/>
     <property name="java.vm.version" value="17.0.17+10-LTS"/>
@@ -60,20 +60,20 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testAddHonorsStudent" classname="com.student.StudentManagerTest" time="0.002"/>
-  <testcase name="testGetAverageGradeWithMultipleStudents" classname="com.student.StudentManagerTest" time="0.001"/>
-  <testcase name="testGetAverageGradeWithNoStudents" classname="com.student.StudentManagerTest" time="0.001"/>
-  <testcase name="testAddDuplicateStudent" classname="com.student.StudentManagerTest" time="0.001"/>
+  <testcase name="testAddHonorsStudent" classname="com.student.StudentManagerTest" time="0.003"/>
+  <testcase name="testGetAverageGradeWithMultipleStudents" classname="com.student.StudentManagerTest" time="0.003"/>
+  <testcase name="testGetAverageGradeWithNoStudents" classname="com.student.StudentManagerTest" time="0"/>
+  <testcase name="testAddDuplicateStudent" classname="com.student.StudentManagerTest" time="0.002"/>
   <testcase name="testDIPConstructorWithRepository" classname="com.student.StudentManagerTest" time="0"/>
   <testcase name="testMixedStudentTypes" classname="com.student.StudentManagerTest" time="0"/>
-  <testcase name="testAddNullStudent" classname="com.student.StudentManagerTest" time="0.001"/>
+  <testcase name="testAddNullStudent" classname="com.student.StudentManagerTest" time="0.002"/>
   <testcase name="testAverageGradeWithMixedTypes" classname="com.student.StudentManagerTest" time="0"/>
   <testcase name="testAddRegularStudent" classname="com.student.StudentManagerTest" time="0"/>
-  <testcase name="testAddStudentByNameAndGrade" classname="com.student.StudentManagerTest" time="0.001"/>
-  <testcase name="testGetStudentsReturnsNewList" classname="com.student.StudentManagerTest" time="0.001"/>
+  <testcase name="testAddStudentByNameAndGrade" classname="com.student.StudentManagerTest" time="0"/>
+  <testcase name="testGetStudentsReturnsNewList" classname="com.student.StudentManagerTest" time="0.003"/>
   <testcase name="testGetStudentCount" classname="com.student.StudentManagerTest" time="0"/>
   <testcase name="testGetStudentsByStatus" classname="com.student.StudentManagerTest" time="0"/>
   <testcase name="testDIPDependsOnAbstraction" classname="com.student.StudentManagerTest" time="0"/>
-  <testcase name="testGetAverageGradeWithOneStudent" classname="com.student.StudentManagerTest" time="0.001"/>
+  <testcase name="testGetAverageGradeWithOneStudent" classname="com.student.StudentManagerTest" time="0"/>
   <testcase name="testAddStudentObject" classname="com.student.StudentManagerTest" time="0.001"/>
 </testsuite>
