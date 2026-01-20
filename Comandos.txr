@@ -1,2 +1,13 @@
 Ejecutar test
 mvn clean test
+Ejecutar aplicacion
+mvn clean compile exec:java
+Generacion de reportes
+mvn clean test checkstyle:checkstyle pmd:pmd jacoco:report
+
+A) JaCoCo - Cobertura
+start target\site\jacoco\index.html
+B) Checkstyle - Estilo de código
+start target\site\checkstyle.html
+C) PMD - Detección de problemas
+start target\site\pmd.html

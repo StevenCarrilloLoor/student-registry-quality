@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Gradable.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Identifiable.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Reportable.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\interfaces\Statusable.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\BaseStudent.java">
+<error line="44" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="45" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\HonorsStudent.java">
+<error line="41" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="42" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="43" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\model\RegularStudent.java">
+<error line="29" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="30" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="31" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="32" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\report\ReportGenerator.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\repository\InMemoryStudentRepository.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\repository\StudentRepository.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\service\StudentService.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\Student.java">
+<error line="38" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+<error line="39" column="9" severity="warning" message="&apos;if&apos; construct must use &apos;{}&apos;s." source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\StudentManager.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\CompositeValidator.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\MinimumGradeValidator.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\MinimumNameLengthValidator.java">
+</file>
+<file name="C:\Users\steve\Desktop\Poryectos\Claidad de softeare\Proyecto integrador2.0\student-registry-quality\src\main\java\com\student\validation\StudentValidator.java">
+</file>
+</checkstyle>
